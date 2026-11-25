@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-PieceGenerator::PieceGenerator() {
+PieceGenerator::PieceGenerator(RandomizerMode mode) : mode_(mode) {
     // Seed the engine once when this object is created.
     std::random_device seedSource;
     generator_.seed(seedSource());
@@ -10,6 +10,10 @@ PieceGenerator::PieceGenerator() {
 }
 
 TetrominoType PieceGenerator::next() {
+    if (mode_ == RandomizerMode::Independent) {
+        std::uniform_int_distribution<std::size_t> choose(0, bag_.size() - 1);
+        return bag_[choose(generator_)];
+    }
     if (nextIndex_ == bag_.size()) {
         refillBag();
     }

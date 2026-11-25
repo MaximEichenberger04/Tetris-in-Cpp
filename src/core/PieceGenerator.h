@@ -1,16 +1,18 @@
 #pragma once
 
 #include "Types.h"
+#include "GameSettings.h"
 #include <array>
 #include <cstddef>
 #include <random>
 
 class PieceGenerator {
 public:
-    PieceGenerator(); // constructor
+    explicit PieceGenerator(RandomizerMode mode = RandomizerMode::SevenBag);
     TetrominoType next(); // return next TetrominoType
 
 private:
+    RandomizerMode mode_;
     // Each bag contains exactly one of each piece type. -> fixed size
     std::array<TetrominoType, 7> bag_ = {
         TetrominoType::I, TetrominoType::O, TetrominoType::T,

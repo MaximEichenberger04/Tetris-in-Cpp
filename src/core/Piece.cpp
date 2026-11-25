@@ -49,14 +49,14 @@ Piece::Piece(TetrominoType type)
             rows[3] = "....";
             break;
 
-        case TetrominoType::L: // L: L-shape
+        case TetrominoType::J: // J: extra square above the left end
             rows[0] = "#...";
             rows[1] = "###.";
             rows[2] = "....";
             rows[3] = "....";
             break;
 
-        case TetrominoType::J: // J: Mirrored L-shape
+        case TetrominoType::L: // L: extra square above the right end
             rows[0] = "..#.";
             rows[1] = "###.";
             rows[2] = "....";

@@ -9,7 +9,7 @@
 
 class Game {
 public:
-    Game(); // Creates the board, generator, and first falling piece.
+    explicit Game(const GameSettings& settings = GameSettings{});
 
     const Board& board() const;
     const Piece& activePiece() const;
@@ -21,6 +21,10 @@ public:
     bool tryRotate();
     // True: moved down. False: locked and spawned, or game already over.
     bool stepDown();
+    
+    void handleAction(Action action);
+    // deltaTime is elapsed time in seconds; invalid/non-positive values are ignored.
+    void update(double deltaTime);
 
 private:
     Board board_;
@@ -31,4 +35,7 @@ private:
 
     void spawnPiece();
     void lockActivePiece();
+
+    double fallTimer_ = 0.0;
+    double fallInterval_ = 0.5;
 };
